@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import './mobile-design.css'
-import './zestora-system.css'
+import './ordersense-system.css'
 import { installDemoApi } from './demoApi.ts'
 
 installDemoApi()

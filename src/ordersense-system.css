@@ -1,0 +1,441 @@
+/* OrderSense / OrderSense. Shared tokens and final presentation layer.
+   Legacy modules still own behavior and layout internals. Keep overrides scoped. */
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-Variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+:root {
+  --font-sans: 'Manrope', 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-heading: var(--font-sans);
+  --brand-primary: #2563eb;
+  --brand-navy: #111f36;
+  --brand-navy-light: #35465e;
+  --bg-primary: #e9ecf1;
+  --bg-secondary: #fff;
+  --bg-surface: #fff;
+  --bg-surface-hover: #f4f7fc;
+  --text-primary: #111f36;
+  --text-secondary: #4e5e73;
+  --text-muted: #64748b;
+  --border-color: #dce2eb;
+  --border-focus: #2563eb;
+  --primary-glow: #edf3ff;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --shadow-sm: 0 2px 4px #13264006, 0 5px 12px #13264008;
+  --shadow-md: 0 2px 4px #13264006, 0 8px 24px -8px #13264024;
+  --shadow-lg: 0 4px 8px #13264008, 0 16px 40px -12px #13264030;
+  --shadow-premium: var(--shadow-lg);
+  --shadow-premium-sm: var(--shadow-md);
+  --transition-smooth: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+body { background: var(--bg-primary) !important; letter-spacing: 0; }
+@supports (padding: max(0px)) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  .ordersense-app .dashboard-header {
+    height: calc(76px + env(safe-area-inset-top));
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+  .workspace-nav { top: calc(76px + env(safe-area-inset-top)); }
+  .ordersense-app.dashboard-container { padding-top: calc(100px + env(safe-area-inset-top)); }
+  .ordersense-app dialog.nav-drawer { padding-top: env(safe-area-inset-top); }
+}
+body :is(h1,h2,h3,h4) { font-weight: 800 !important; letter-spacing: -.04em !important; line-height: 1.25; }
+button, input, select, textarea { letter-spacing: 0; }
+button, summary, [role=button] { touch-action: manipulation; }
+button:not(:disabled), summary { cursor: pointer; }
+:is(button,a,input,select,textarea,summary,[tabindex]):focus-visible { outline: 3px solid #2563eb !important; outline-offset: 3px; }
+button:disabled { cursor: not-allowed; }
+.ordersense-app.dashboard-container { max-width: 1800px; padding: 100px 36px 48px 280px; gap: 24px; overflow: visible; background: transparent; }
+.ordersense-app .dashboard-header { position: fixed; inset: 0 0 auto; height: 76px; padding: 16px 32px; margin: 0; border: 0; border-bottom: 1px solid #dce2eb; border-radius: 0; background: #fff; box-shadow: 0 3px 16px #13264008; z-index: 80; flex-direction: row; }
+.ordersense-app .brand-name { font-size: 23px !important; font-weight: 750 !important; letter-spacing: -.04em !important; }
+.ordersense-app .brand-subtitle { font-size: 10px !important; font-weight: 500 !important; letter-spacing: .07em !important; margin-top: 4px; }
+.ordersense-app .logo-icon { background: #edf3ff; border: 0; box-shadow: none; border-radius: 10px; color: var(--brand-primary); }
+.ordersense-app .profile-avatar-btn { background: var(--brand-navy); border: 0; box-shadow: none; width: 44px; height: 44px; }
+.ordersense-app .last-sync-tag { box-shadow: none; border: 0; color: var(--text-muted); font-size: 12px; }
+.workspace-nav { position: fixed; top: 76px; left: 0; bottom: 0; width: 244px; background: #fff; border-right: 1px solid var(--border-color); padding: 24px 16px; box-shadow: 4px 0 18px #13264004; overflow-y: auto; z-index: 70; }
+.workspace-nav-title { color: var(--text-muted); font-size: 10px; letter-spacing: .14em; padding: 0 12px 20px; }
+.workspace-nav-group { margin-bottom: 18px; }
+.workspace-nav-group h2 { padding: 0 12px 6px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em !important; font-weight: 600 !important; }
+.workspace-nav-group button { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; padding: 11px 12px; min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: var(--text-secondary); font-size: 12px; font-weight: 650; margin: 3px 0; transition: var(--transition-smooth); }
+.workspace-nav-group button svg { flex-shrink: 0; }
+.workspace-nav-group button:hover { background: var(--bg-surface-hover); }
+.workspace-nav-group button[aria-current=page] { background: var(--brand-primary); color: #fff; font-weight: 750; box-shadow: 0 5px 12px #2563eb30; }
+.workspace-nav-footer { display: flex; gap: 10px; padding: 18px 10px 0; border-top: 1px solid var(--border-color); font-size: 11px; color: var(--text-secondary); }
+.workspace-nav-footer svg { color: var(--brand-primary); flex-shrink: 0; }
+.workspace-nav-footer small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
+.ordersense-app dialog.nav-drawer { margin: 0; height: 100dvh; max-height: 100dvh; max-width: 88vw; border: 0; border-right: 1px solid var(--border-color); border-radius: 0; background: #fff; color: var(--text-primary); }
+.ordersense-app dialog.nav-drawer::backdrop { background: #14243d66; backdrop-filter: blur(3px); }
+.workspace-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.workspace-eyebrow { color: var(--text-muted); letter-spacing: .12em; font-size: 10px; font-weight: 600; }
+.workspace-heading h1 { margin: 8px 0; font-size: clamp(26px, 2.5vw, 34px); }
+.workspace-heading p { color: var(--text-secondary); font-size: 14px; }
+.workspace-period { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); border: 1px solid var(--border-color); background: #fff; border-radius: 8px; padding: 9px 12px; font-size: 13px; }
+.ordersense-app :is(.btn-primary,.btn-secondary,.btn-modal-cancel,.au-primary,.au-secondary) { box-shadow: none !important; font-weight: 600 !important; min-height: 44px; border-radius: 10px !important; }
+.ordersense-app .stats-grid { gap: 12px; }
+.ordersense-app .metric-card { padding: 20px; gap: 14px; border: 1px solid #fff; border-radius: 18px; box-shadow: var(--shadow-md); transform: none; }
+.ordersense-app .metric-icon-wrapper { width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px; }
+.ordersense-app .metric-value { font-size: 32px; font-weight: 800 !important; line-height: 1.15; font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
+.ordersense-app .metric-label { font-size: 12px; font-weight: 500 !important; color: var(--text-muted); }
+.ordersense-app .controls-container { padding: 16px; border: 1px solid #fff; box-shadow: var(--shadow-sm); border-radius: 18px; gap: 12px; }
+.ordersense-app .controls-filter-row { display: flex; flex-wrap: wrap; flex-direction: row; align-items: center; gap: 10px; }
+.ordersense-app :is(.search-input,.select-custom,.form-input) { min-height: 46px; border-radius: 12px; background: #f3f5f8; border-color: #e6eaf0; box-shadow: inset 0 1px 2px #13264004; font-weight: 500 !important; }
+.ordersense-app .filter-label { font-weight: 500 !important; }
+.forecast-filters>summary { display: flex; align-items: center; gap: 12px; justify-content: space-between; min-height: 44px; color: var(--text-secondary); font-size: 13px; font-weight: 600; list-style: none; }
+.forecast-filters>summary span { color: var(--text-muted); font-size: 11px; font-weight: 400; margin-left: auto; }
+.forecast-filters>summary::after { content: '+'; color: var(--brand-primary); font-size: 20px; }
+.forecast-filters[open]>summary::after { content: '−'; }
+.forecast-filters[open] .controls-filter-row { padding: 8px 0; }
+.ordersense-app .suppression-panel { margin: 0; box-shadow: none; border: 1px solid var(--border-color); border-radius: 10px; background: transparent; }
+.ordersense-app .suppression-toggle { min-height: 44px; padding: 10px 14px; font-size: 12px; }
+.ordersense-app .chips-row { gap: 6px; }
+.ordersense-app .chip-btn { min-height: 36px; padding: 6px 16px; border-radius: 999px; font-weight: 700; transition: var(--transition-smooth); }
+.ordersense-app .chip-btn.active { background: var(--brand-navy); }
+.ordersense-app .results-container { box-shadow: var(--shadow-md); border-radius: 18px; }
+.ordersense-app .data-table th { font-size: 11px; color: var(--text-muted); text-transform: none; letter-spacing: 0; background: #f4f6fa; padding: 16px; font-weight: 700; }
+.ordersense-app .data-table td { padding: 16px; font-size: 13px; }
+.ordersense-app .entity-name { font-size: 13px; font-weight: 600; }
+.ordersense-app .entity-id { color: var(--text-muted); font-family: var(--font-sans); font-size: 10px; }
+.record-toggle { display: none; }
+.results-summary { color: var(--text-muted); font-size: 12px; margin-bottom: -12px; scroll-margin-top: 96px; }
+.results-pager { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--text-secondary); font-size: 12px; }
+.results-pager button { border: 1px solid var(--border-color); background: white; color: var(--brand-navy); border-radius: 8px; min-height: 44px; padding: 10px 16px; font-weight: 600; }
+.results-pager button:disabled { opacity: .45; }
+.ordersense-app .sub-tab-nav { align-self: flex-start; border: 1px solid var(--border-color); background: #e4e8ee; padding: 4px; border-radius: 10px; box-shadow: none; margin: 0; }
+.ordersense-app .sub-tab-btn { min-height: 40px; font-size: 13px; font-weight: 600 !important; padding: 8px 16px; border-radius: 7px; }
+.ordersense-app .sub-tab-btn.active { background: #fff; color: var(--brand-navy); box-shadow: 0 1px 3px #14243d12; }
+.ordersense-app .customer-cards-grid { padding: 0; gap: 16px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.ordersense-app .results-container:has(.customer-cards-grid) { border: 0; background: transparent; overflow: visible; }
+.ordersense-app .customer-card { transform: none; border: 1px solid #fff; border-radius: 20px; box-shadow: var(--shadow-md); overflow: hidden; transition: border-color 180ms ease, box-shadow 180ms ease; }
+.ordersense-app .card-header { background: #fff; padding: 18px; border-bottom: 0; align-items: flex-start; }
+.ordersense-app .card-customer-name { font-size: 17px; line-height: 1.4; }
+.customer-quick-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 18px 16px; color: var(--text-muted); font-size: 12px; }
+.customer-quick-stats strong { display: block; font-size: 26px; font-weight: 800; letter-spacing: -.04em; color: var(--brand-navy); }
+.customer-analysis { border-top: 1px solid #edf0f5; background: #f8faff; }
+.customer-analysis>summary,.planning-analysis>summary { padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; color: var(--brand-primary); font-weight: 600; font-size: 13px; list-style: none; }
+.customer-analysis>summary::-webkit-details-marker,.planning-analysis>summary::-webkit-details-marker { display: none; }
+details[open]>summary>span[aria-hidden=true] { transform: rotate(45deg); }
+.ordersense-app .customer-card .card-body { grid-template-columns: 1fr; padding: 16px; min-height: 0; gap: 16px; }
+.ordersense-app .customer-card .chart-panel { border: 0; padding: 0; }
+.ordersense-app .donut-wrapper { width: 150px; height: 150px; }
+.ordersense-app .po-forecast-header-card { background: var(--brand-navy); border-radius: 0; padding: 24px; margin-bottom: 0 !important; box-shadow: none; }
+.ordersense-app .po-header-title { font-size: 22px; }
+.ordersense-app .po-header-value { font-size: 30px; font-weight: 700; }
+.planning-analysis { border-bottom: 1px solid var(--border-color); }
+.ordersense-app .vendor-po-card { border-radius: 18px; box-shadow: var(--shadow-md); }
+.ordersense-app :is(.au-create,.au-access-settings,.au-users) { border: 1px solid var(--border-color) !important; border-radius: 18px !important; box-shadow: var(--shadow-md) !important; }
+.ordersense-app .admin-users-page { padding-top: 0; }
+.ordersense-app .au-section-title { min-height: 44px; margin: 0; list-style: none; align-items: center; }
+.ordersense-app details[open]>.au-section-title { margin-bottom: 16px; }
+.ordersense-app details>.au-section-title::after { content: '+'; margin-left: auto; color: var(--brand-primary); font-size: 24px; }
+.ordersense-app details[open]>.au-section-title::after { content: '−'; }
+.ordersense-app .au-role-row { border: 0 !important; border-bottom: 1px solid var(--border-color) !important; box-shadow: none !important; background: transparent !important; margin: 0; padding: 10px 0 !important; border-radius: 0; }
+.ordersense-app .au-access-rule { box-shadow: none !important; border-radius: 8px !important; }
+.ordersense-app .au-ident strong { font-size: 13px; font-weight: 600 !important; letter-spacing: 0 !important; }
+.ordersense-app .au-ident span { font-size: 11px; }
+.ordersense-app .au-actions button { min-height: 44px; font-size: 12px; padding: 8px; }
+.ordersense-app .au-level { font-size: 10px; }
+.ordersense-app .au-form label { font-size: 12px; }
+.ordersense-app .au-access summary { min-height: 44px; font-size: 12px; }
+.ordersense-app .au-heading p,.ordersense-app .au-section-title p { font-size: 12px; line-height: 1.5; }
+.ordersense-app .crm { padding: 0; }
+.ordersense-app .crm>nav { flex-wrap: nowrap; overflow-x: auto; padding: 6px; border-radius: 16px; box-shadow: var(--shadow-sm); gap: 2px; }
+.ordersense-app .crm>nav button { flex: 0 0 auto; padding: 10px 14px; border-radius: 7px; }
+.ordersense-app .crm :is(article,.crm-form,.crm-panel) { border-color: #fff; box-shadow: var(--shadow-md); border-radius: 18px; }
+.ordersense-app .crm h1 { font-size: 34px; }
+.ordersense-app .crm-filter-details { background: white; border: 1px solid var(--border-color); border-radius: 10px; margin: 12px 0; }
+.ordersense-app .crm-filter-details>summary { padding: 10px 14px; font-size: 13px; }
+.crm-filter-details>summary span { margin-left: auto; color: var(--text-muted); font-size: 11px; font-weight: 400; }
+.ordersense-app .crm-toolbar { margin: 0; background: #f9fafc; border-radius: 0 0 10px 10px; }
+.ordersense-app .crm-updates { border: 1px solid var(--border-color); background: #fff; padding: 0 16px; border-radius: 12px; margin-top: 20px; }
+.ordersense-app .crm-updates>summary h2 { font-size: 16px; margin: 14px 0; }
+.ordersense-app .crm-deal-row { display: grid; grid-template-columns: minmax(180px,1.2fr) minmax(140px,1fr); gap: 4px 20px; padding: 16px 18px; }
+.ordersense-app .crm article.crm-deal-row>.crm-deal-title { background: transparent; border: 0; padding: 0; justify-content: flex-start; }
+.ordersense-app .crm-deal-row>span { align-self: center; margin: 0; }
+.ordersense-app .crm-deal-row>p,.ordersense-app .crm-deal-row>small { margin: 0; }
+.ordersense-app .ceo-page { padding: 0; background: transparent; }
+.ordersense-app .ceo-page .ceo-metric { border-radius: 18px; box-shadow: var(--shadow-md); border-color: #fff; transition: var(--transition-smooth); }
+.ordersense-app :is(.ceo-metric,.metric-card,.customer-card):hover { transform: none; }
+.ordersense-app :is(.modal-card,.ceo-modal,.sf-modal,.delivery-modal,.followup-dialog,.suppression-dialog) { max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+.ordersense-app dialog.workspace-dialog { margin: auto; width: min(520px,calc(100vw - 24px)); max-width: 520px; padding: 0; color: var(--text-primary); }
+.workspace-dialog::backdrop { background: #14243d80; backdrop-filter: blur(4px); }
+.workspace-dialog .legend-item { gap: 12px; align-items: start; }
+.workspace-dialog .legend-item>span { flex: 0 0 92px; text-align: right; }
+.ordersense-app dialog.workspace-dialog { padding: 0 !important; }
+.workspace-dialog .modal-body { padding: 16px !important; }
+.workspace-dialog .modal-header { padding: 14px 16px; }
+.ordersense-app :is(.modal-close-btn,.ceo-close,.drawer-close-btn) { width: 44px !important; height: 44px !important; min-height: 44px !important; }
+.preview-indicator { position: fixed; bottom: 12px; right: 12px; z-index: 79; background: #14243d; color: white; border-radius: 6px; padding: 6px 10px; font: 11px/1.4 var(--font-sans); pointer-events: none; }
+
+/* A strong brand anchor, with depth reserved for working surfaces. */
+.ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #111f36;
+  border: 1px solid #243a59;
+  border-radius: 22px;
+  padding: 28px 32px;
+  box-shadow: 0 8px 24px -8px #111f3633;
+}
+.ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header)::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: 260px;
+  height: 260px;
+  right: 6%;
+  top: -38px;
+  opacity: .18;
+  background: url('/ordersense.svg') center / contain no-repeat;
+  transform: rotate(-12deg);
+}
+.ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) h1 {
+  color: #fff;
+  font-size: clamp(30px,2.7vw,40px) !important;
+  line-height: 1.15;
+  margin: 8px 0 10px;
+}
+.ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) p { color: #c0cbdd; font-size: 13px; line-height: 1.6; }
+.ordersense-app :is(.workspace-eyebrow,.crm>header small,.ceo-header .ceo-eyebrow,.au-heading>div>span) { color: #a7c6ff; font-size: 10px; font-weight: 800; letter-spacing: .15em; }
+.ordersense-app .ceo-header .ceo-greeting { color: #fff; font-size: 14px; }
+.ordersense-app .workspace-period { background: #ffffff10; border-color: #ffffff30; color: #e5edfa; border-radius: 12px; font-weight: 650; padding: 11px 14px; }
+.ordersense-app .au-heading>b { background: #ffffff16; color: #d6e4ff; border: 1px solid #ffffff25; }
+.ordersense-app .dashboard-header .logo-icon { background: #fff; box-shadow: 0 3px 12px #2563eb16; }
+.ordersense-app .brand-name { font-weight: 800 !important; }
+.ordersense-app .brand-subtitle { font-weight: 650 !important; }
+.ordersense-app .workspace-nav-title { font-weight: 750; font-size: 9px; }
+.ordersense-app .workspace-nav-group h2 { font-size: 9px; font-weight: 800 !important; }
+.ordersense-app .metric-icon-wrapper { background: #edf3ff; border: 1px solid #dce7ff; }
+.ordersense-app .entity-name { font-weight: 750; }
+.ordersense-app .entity-id { font-size: 10px; opacity: .8; }
+.ordersense-app .data-table tbody tr { transition: background-color 160ms ease; }
+.ordersense-app .badge { font-weight: 700; border-radius: 7px; }
+.ordersense-app .results-summary { font-weight: 650; color: #58677d; }
+.ordersense-app .results-container:has(.customer-cards-grid) { box-shadow: none; }
+.ordersense-app .card-header { gap: 12px; }
+.customer-avatar { flex: 0 0 42px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 14px; color: #2563eb; background: #eaf1ff; }
+.ordersense-app .card-title-group { flex: 1; min-width: 0; }
+.ordersense-app .card-meta-badge { background: #f0f3f8; border: 0; color: #52627b; font-size: 10px; font-weight: 750; }
+.ordersense-app .card-customer-id { font-size: 10px; color: var(--text-muted); }
+.customer-meta-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
+.customer-meta-line .card-meta-badge { padding: 2px 7px; }
+.customer-quick-stats>span+span { border-left: 1px solid #e6eaf1; padding-left: 20px; }
+.customer-analysis>summary { color: #234d96; transition: var(--transition-smooth); }
+.customer-analysis>summary>span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #e8efff; transition: transform 180ms ease; }
+.ordersense-app .crm-deal-row>.crm-deal-title strong { color: #14243d; font-size: 16px; font-weight: 800; }
+.ordersense-app .crm-deal-row>.crm-deal-title small { background: #edf3ff; color: #3467bd; padding: 4px 7px; border-radius: 7px; }
+.ordersense-app .crm-deal-row>p { font-weight: 700; color: #203958; }
+.ordersense-app .crm-deal-row>span { font-size: 11px; color: #56677f; }
+.ordersense-app .crm-deal-row>small { color: #738097; }
+.ordersense-app .crm>nav button.selected { color: #fff; background: #111f36; box-shadow: 0 3px 8px #111f3620; }
+.ordersense-app .au-avatar { background: #eaf1ff; color: #2563eb; border-radius: 12px; }
+.ordersense-app .au-user { background: #f9fafc; border-color: #e5eaf2; border-radius: 14px; }
+.ordersense-app .ceo-metric strong { font-family: var(--font-sans); font-weight: 800; letter-spacing: -.05em; }
+.ordersense-app :is(.ceo-chart-card,.ceo-panel) { box-shadow: var(--shadow-md); border-radius: 18px; }
+.ordersense-app :is(button,summary) { transition: var(--transition-smooth); }
+.ordersense-app :is(.btn-primary,.au-primary,.crm>header>button) { box-shadow: 0 4px 12px #2563eb30 !important; }
+.ordersense-app :is(.btn-primary,.btn-secondary,.au-primary,.au-secondary,.crm>header>button,.results-pager button):active:not(:disabled) { transform: translateY(1px); box-shadow: none !important; }
+@media (hover: hover) and (pointer: fine) {
+  .workspace-nav-group button:hover { color: #1d4ed8; background: #edf3ff; transform: translateX(2px); }
+  .workspace-nav-group button[aria-current=page]:hover { color: #fff; background: #1d4ed8; }
+  .ordersense-app :is(.btn-primary,.au-primary,.crm>header>button):hover:not(:disabled) { background: #111f36 !important; border-color: #111f36 !important; color: #fff !important; box-shadow: 0 6px 16px #111f362e !important; transform: translateY(-1px); }
+  .ordersense-app .crm>header>button:hover:not(:disabled) { background: #fff !important; color: #111f36 !important; border-color: #fff !important; }
+  .ordersense-app :is(.chip-btn,.results-pager button,.sub-tab-btn,.crm>nav button):hover:not(:disabled) { background: #111f36; color: #fff; border-color: #111f36; }
+  .ordersense-app .customer-analysis>summary:hover { color: #fff; background: #2563eb; }
+  .ordersense-app .customer-analysis>summary:hover>span { background: #ffffff24; }
+  .ordersense-app :is(.customer-card,.crm-deal-row):hover { border-color: #bdcef0; box-shadow: var(--shadow-lg); }
+  .ordersense-app .crm article.crm-deal-row>.crm-deal-title:hover strong { color: #2563eb; }
+  .ordersense-app .ceo-page .ceo-metric:hover { border-color: #b8ccf2; background: #f8faff; box-shadow: var(--shadow-lg); }
+  .ordersense-app .data-table tbody tr:hover { background: #f5f8ff; }
+}
+@media (min-width: 769px) {
+  .ordersense-app>.stats-grid .metric-card:first-child { background: #2563eb; border-color: #2563eb; }
+  .ordersense-app>.stats-grid .metric-card:first-child :is(.metric-value,.metric-label) { color: #fff; }
+  .ordersense-app>.stats-grid .metric-card:first-child .metric-icon-wrapper { background: #ffffff1c; color: #fff; border-color: #ffffff20; }
+  .ordersense-app .controls-container { display: grid; grid-template-columns: minmax(200px,1fr) minmax(250px,.8fr); align-items: start; }
+  .ordersense-app .controls-container>.chips-row { grid-column: 1/-1; }
+  .ordersense-app .hamburger-btn { display: none; }
+  .ordersense-app .table-responsive { overflow-x: auto; }
+  .ordersense-app .data-table { min-width: 640px; }
+  .ordersense-app .mobile-predictions-alert-card { display: none; }
+}
+@media (max-width: 1100px) and (min-width: 769px) {
+  .workspace-nav { width: 212px; padding: 20px 10px; }
+  .ordersense-app.dashboard-container { padding-left: 236px; padding-right: 24px; }
+  .ordersense-app .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .ordersense-app .customer-cards-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) { padding: 20px; border-radius: 18px; }
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) h1 { font-size: 27px !important; }
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) p { font-size: 12px; }
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header)::after { width: 160px; height: 160px; right: -30px; top: -12px; opacity: .1; }
+  .ordersense-app .customer-avatar { width: 34px; height: 34px; flex-basis: 34px; border-radius: 11px; }
+  .ordersense-app .card-customer-name { font-size: 14px; }
+  .ordersense-app .card-header { flex-wrap: wrap; gap: 8px; }
+  .ordersense-app .card-meta-badge { margin: 0; }
+  .ordersense-app .customer-quick-stats { gap: 10px; }
+  .ordersense-app .customer-quick-stats>span+span { padding-left: 14px; }
+  .workspace-nav { display: none; }
+  .ordersense-app.dashboard-container { padding: 88px 16px calc(40px + env(safe-area-inset-bottom)) !important; gap: 16px; }
+  .ordersense-app .dashboard-header { height: 68px; margin: 0 !important; padding: 10px 16px !important; border-radius: 0 !important; }
+  .ordersense-app .brand-name { font-size: 21px !important; }
+  .ordersense-app .brand-subtitle { font-size: 8px !important; }
+  .ordersense-app .logo-icon { display: none; }
+  .ordersense-app .profile-avatar-btn { width: 40px; height: 40px; min-height: 40px !important; }
+  .workspace-heading { align-items: flex-start; }
+  .workspace-heading h1 { font-size: 27px; margin: 6px 0; }
+  .workspace-heading p { font-size: 12px; line-height: 1.5; }
+  .workspace-period { display: none; }
+  .workspace-eyebrow { font-size: 9px; }
+  .ordersense-app .mobile-predictions-alert-card { display: block; padding: 0; background: #fff8ea !important; border: 1px solid #eedaba; color: #78531c; border-radius: 10px; box-shadow: none; margin: 0; }
+  .ordersense-app .alert-card-header { padding: 10px 12px; margin: 0; border: 0; min-height: 44px; list-style: none; cursor: pointer; }
+  .ordersense-app .alert-card-header h4 { color: #78531c; font-size: 13px; }
+  .ordersense-app .alert-card-header::after { content: '+'; font-size: 20px; }
+  .ordersense-app details[open]>.alert-card-header::after { content: '−'; }
+  .ordersense-app .alert-count-badge,.ordersense-app .alert-ping-dot { display: none; }
+  .ordersense-app .alert-card-body { padding: 0 12px 12px; }
+  .ordersense-app :is(.alert-item-product,.alert-item-qty,.alert-empty-state) { color: var(--text-primary); }
+  .ordersense-app .alert-item-customer { color: var(--text-secondary); }
+  .ordersense-app.dashboard-container>.stats-grid { display: grid !important; grid-template-columns: repeat(4,minmax(0,1fr)) !important; gap: 0 !important; padding: 10px 0; background: #fff; border: 1px solid var(--border-color); border-radius: 12px; }
+  .ordersense-app>.stats-grid .metric-card { min-height: 0; border: 0; border-right: 1px solid var(--border-color); padding: 4px 10px !important; border-radius: 0 !important; align-items: flex-start; }
+  .ordersense-app>.stats-grid .metric-card:last-child { border: 0; }
+  .ordersense-app>.stats-grid .metric-value { font-size: 22px !important; }
+  .ordersense-app>.stats-grid .metric-label { font-size: 10px !important; }
+  .ordersense-app .stats-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .ordersense-app .metric-card { min-height: 72px; padding: 10px 12px !important; border-radius: 10px !important; gap: 8px; box-shadow: none !important; }
+  .ordersense-app .metric-icon-wrapper { display: none; }
+  .ordersense-app .metric-value { font-size: 24px !important; line-height: 1.2; }
+  .ordersense-app .metric-label { font-size: 11px !important; line-height: 1.4; }
+  .ordersense-app .controls-container { padding: 12px; gap: 10px; }
+  .ordersense-app .suppression-panel { box-shadow: none !important; border-radius: 10px !important; }
+  .ordersense-app .controls-filter-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .ordersense-app .controls-filter-row>.filter-label { grid-column: 1/-1; min-height: 32px; }
+  .ordersense-app .controls-filter-row select { width: 100%; font-size: 14px !important; padding: 8px; }
+  .ordersense-app .chips-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .ordersense-app .chips-row button { flex-shrink: 0; min-height: 44px; padding: 8px 14px; border-radius: 999px; }
+  .ordersense-app .results-container:has(.compact-record) { background: transparent; border: 0; }
+  .ordersense-app table.z-mobile-table tr.compact-record { border-radius: 16px; box-shadow: var(--shadow-sm); padding: 12px; margin: 0 0 8px; gap: 4px 12px; }
+  .ordersense-app table.z-mobile-table .compact-record td { padding: 6px 0 !important; font-size: 13px !important; }
+  .ordersense-app table.z-mobile-table .compact-record:not(.is-expanded) td.record-secondary { display: none !important; }
+  .ordersense-app table.z-mobile-table .compact-record td.record-toggle { display: block !important; grid-column: 1/-1; border: 0; padding: 0 !important; }
+  .ordersense-app .record-toggle button { display: flex; justify-content: space-between; align-items: center; border: 0; background: #f5f7fb; color: #1d4ed8; padding: 10px 12px; margin: 4px 0 0 !important; border-radius: 8px; font-size: 12px !important; }
+  .ordersense-app table.z-mobile-table .compact-record td::before { font-size: 10px; margin-bottom: 3px; }
+  .ordersense-app table.z-mobile-table .compact-record td:first-child::before { display: none !important; }
+  .ordersense-app table.z-mobile-table .compact-record td:first-child .entity-name { font-size: 15px; }
+  .ordersense-app .sub-tab-nav { display: flex; width: 100%; align-self: stretch; overflow-x: auto; }
+  .ordersense-app .sub-tab-btn { flex: 1; padding: 8px !important; font-size: 12px !important; white-space: normal; }
+  .ordersense-app .customer-cards-grid { grid-template-columns: 1fr; gap: 10px; }
+  .ordersense-app .card-header { padding: 14px 14px 10px; }
+  .customer-quick-stats { padding: 0 14px 12px; }
+  .customer-quick-stats strong { font-size: 21px; }
+  .ordersense-app .card-body { min-height: 0; }
+  .ordersense-app .po-forecast-header-card { padding: 18px; gap: 16px; }
+  .ordersense-app .po-header-title { font-size: 18px !important; }
+  .ordersense-app .po-header-right { text-align: left !important; width: 100%; }
+  .ordersense-app .po-header-value { font-size: 28px; }
+  .ordersense-app .po-header-subtitle { font-size: 10px; }
+  .ordersense-app .crm>nav { display: flex; gap: 0; margin-bottom: 16px; }
+  .ordersense-app .crm>nav button { flex-direction: row; min-height: 44px !important; padding: 10px 12px; font-size: 12px !important; }
+  .ordersense-app .crm>nav button svg { width: 16px; }
+  .ordersense-app .crm>header { margin: 0 0 16px; gap: 12px; }
+  .ordersense-app .crm h1 { font-size: 27px; }
+  .ordersense-app .crm h2 { font-size: 20px; margin: 20px 0 12px; }
+  .ordersense-app .crm-deal-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 14px; margin: 8px 0; }
+  .ordersense-app .crm-deal-row>small { font-size: 11px; }
+  .ordersense-app .crm-toolbar { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 10px; }
+  .ordersense-app .crm-kanban { display: flex; overflow-x: auto; scroll-snap-type: x proximity; }
+  .ordersense-app .crm-kanban>section { flex: 0 0 85%; scroll-snap-align: start; }
+  .ordersense-app .au-heading h1 { font-size: 27px !important; }
+  .ordersense-app .au-create,.ordersense-app .au-access-settings,.ordersense-app .au-users { padding: 14px; }
+  .ordersense-app .au-access-settings { margin: 12px 0; }
+  .ordersense-app .au-form { grid-template-columns: 1fr !important; }
+  .ordersense-app .au-role-row { grid-template-columns: 1fr !important; }
+  .ordersense-app .au-role-toggle { font-size: 12px !important; min-height: 32px; }
+  .ordersense-app .ceo-inline-stats { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .ordersense-app .ceo-header { gap: 12px; }
+  .ordersense-app .ceo-controls { margin-top: 16px; }
+  .ordersense-app .ceo-tabs { margin-top: 12px; }
+  .ordersense-app .ceo-freshness { margin: 10px 0 14px; }
+  .ordersense-app .ceo-group-links { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding-bottom: 4px; }
+  .ordersense-app .ceo-group-links a { flex: 0 0 auto; min-height: 44px; white-space: nowrap; padding: 10px 14px; }
+  .ordersense-app :is(.modal-card,.ceo-modal,.sf-modal,.delivery-modal,.followup-dialog,.suppression-dialog) { border-radius: 14px !important; padding: 16px !important; }
+}
+@media (max-width: 360px) {
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) { padding: 16px; }
+  .ordersense-app :is(.workspace-heading,.crm>header,.au-heading,.ceo-header) h1 { font-size: 24px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ordersense-app :is(button,summary):is(:hover,:active) { transform: none !important; }
+  *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+@media (max-width: 768px) {
+  .ordersense-app .dashboard-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    top: 0 !important;
+    height: calc(68px + env(safe-area-inset-top, 0px)) !important;
+    min-height: calc(68px + env(safe-area-inset-top, 0px)) !important;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px !important;
+    gap: 8px !important;
+    z-index: 1000 !important;
+  }
+  .ordersense-app.dashboard-container {
+    padding-top: calc(88px + env(safe-area-inset-top, 0px)) !important;
+  }
+  .ordersense-app .brand-wrapper {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    gap: 8px !important;
+  }
+  .ordersense-app .hamburger-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+  }
+  .ordersense-app .brand-title-group {
+    min-width: 0 !important;
+  }
+  .ordersense-app .brand-name,
+  .ordersense-app .brand-subtitle {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .ordersense-app .header-actions {
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin-left: auto !important;
+  }
+  .ordersense-app .last-sync-tag {
+    display: none !important;
+  }
+  .ordersense-app .header-sync-control .btn-sync-header,
+  .ordersense-app .profile-avatar-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: 14px !important;
+  }
+  .ordersense-app .header-sync-menu {
+    right: -52px !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+}

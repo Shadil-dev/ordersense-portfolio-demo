@@ -23,7 +23,7 @@ describe('shared prediction lifecycle across actual application tabs', () => {
     suppressed = false; restored = true; aggregateRequests = 0;
     modules = ['Reorder Forecasting', 'Monthly Product Consumption', 'Purchase Order Forecast', 'Sync & Predict'];
     aggregateQuantity = 60;
-    localStorage.setItem('zestora_token', 'test-token');
+    localStorage.setItem('ordersense_token', 'test-token');
     vi.stubGlobal('fetch', vi.fn(async (input: string | URL | Request) => {
       const url = new URL(String(input));
       let body: unknown;

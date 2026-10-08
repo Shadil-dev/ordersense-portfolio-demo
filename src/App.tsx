@@ -45,8 +45,8 @@ import {
   Phone
 } from 'lucide-react';
 
-// Zestora Logo inline SVG component
-const ZestoraLogo = () => (
+// OrderSense Logo inline SVG component
+const OrderSenseLogo = () => (
   <svg viewBox="0 0 120 120" style={{ width: '28px', height: '28px' }} fill="currentColor" aria-hidden="true">
     {/* Top-Left Shape */}
     <path d="M 10 10 H 68 C 68 36 44 60 10 68 V 10 Z" />
@@ -136,7 +136,7 @@ interface CustomerConsumption {
 }
 
 const chartColors = [
-  'hsl(221, 83%, 53%)', // Zestora Navy-Blue Accent
+  'hsl(221, 83%, 53%)', // OrderSense Navy-Blue Accent
   'hsl(142, 69%, 45%)', // Green Accent
   'hsl(35, 90%, 50%)',  // Amber Accent
   'hsl(200, 95%, 45%)', // Cyan Accent
@@ -486,7 +486,7 @@ function ProductDonutChart({ data }: {
 // The portfolio build is the real product UI with an isolated in-browser data source.
 const LOCAL_PREVIEW = true;
 const API_BASE = '/api';
-const OWNER_EMAIL = 'shadil@zestorahospitality.com';
+const OWNER_EMAIL = 'owner@ordersense.demo';
 
 function App() {
   const [suppressionDialog, setSuppressionDialog] = useState<{ pair: PredictionPair; action: 'suppress' | 'reactivate' } | null>(null);
@@ -562,9 +562,9 @@ function App() {
   }, [consumptionSubTab, activeTab]);
 
   // Authentication State
-  const [token, setToken] = useState<string | null>(LOCAL_PREVIEW ? 'local-preview' : localStorage.getItem('zestora_token'));
-  const [userEmail, setUserEmail] = useState<string | null>(LOCAL_PREVIEW ? 'preview@localhost' : localStorage.getItem('zestora_email'));
-  const [userRole, setUserRole] = useState<string | null>(localStorage.getItem('zestora_role'));
+  const [token, setToken] = useState<string | null>(LOCAL_PREVIEW ? 'local-preview' : localStorage.getItem('ordersense_token'));
+  const [userEmail, setUserEmail] = useState<string | null>(LOCAL_PREVIEW ? 'preview@localhost' : localStorage.getItem('ordersense_email'));
+  const [userRole, setUserRole] = useState<string | null>(localStorage.getItem('ordersense_role'));
   useEffect(() => {
     setCanManageCredit(false);
     setCanFollowup(false);
@@ -676,9 +676,9 @@ function App() {
 
   // Logout handler
   const handleLogout = () => {
-    localStorage.removeItem('zestora_token');
-    localStorage.removeItem('zestora_email');
-    localStorage.removeItem('zestora_role');
+    localStorage.removeItem('ordersense_token');
+    localStorage.removeItem('ordersense_email');
+    localStorage.removeItem('ordersense_role');
     setToken(null);
     setUserEmail(null);
     setUserRole(null);
@@ -800,9 +800,9 @@ function App() {
       }
 
       const data = await response.json();
-      localStorage.setItem('zestora_token', data.token);
-      localStorage.setItem('zestora_email', data.email);
-      localStorage.setItem('zestora_role', data.role);
+      localStorage.setItem('ordersense_token', data.token);
+      localStorage.setItem('ordersense_email', data.email);
+      localStorage.setItem('ordersense_role', data.role);
 
       setToken(data.token);
       setUserEmail(data.email);
@@ -1373,9 +1373,9 @@ function App() {
         <div className="login-card glass-panel">
           <div className="login-header">
             <div className="logo-container">
-              <ZestoraLogo />
+              <OrderSenseLogo />
             </div>
-            <h2 className="login-title">Zestora Hospitality</h2>
+            <h2 className="login-title">OrderSense Hospitality</h2>
             <p className="login-subtitle">Reorder Predictor Dashboard</p>
           </div>
 
@@ -1432,7 +1432,7 @@ function App() {
   }
 
   return (
-    <div className="dashboard-container zestora-app">
+    <div className="dashboard-container ordersense-app">
       {/* Brand Header */}
       <header className="dashboard-header">
         <div className="brand-wrapper">
@@ -1444,10 +1444,10 @@ function App() {
             <Menu size={20} />
           </button>
           <div className="logo-icon">
-            <ZestoraLogo />
+            <OrderSenseLogo />
           </div>
           <div className="brand-title-group">
-            <span className="brand-name">Zestora</span>
+            <span className="brand-name">OrderSense</span>
             <span className="brand-subtitle">OrderSense workspace</span>
           </div>
         </div>
@@ -1518,10 +1518,10 @@ function App() {
             <div className="drawer-header">
               <div className="brand-wrapper">
                 <div className="logo-icon">
-                  <ZestoraLogo />
+                  <OrderSenseLogo />
                 </div>
                 <div className="brand-title-group">
-                  <span className="brand-name">Zestora</span>
+                  <span className="brand-name">OrderSense</span>
                   <span className="brand-subtitle">Hospitality</span>
                 </div>
               </div>
@@ -1563,7 +1563,7 @@ function App() {
             </button>;
           })}
         </section>)}
-        <div className="workspace-nav-footer"><ZestoraLogo /><span>Clarity in every order.<small>Hospitality solutions</small></span></div>
+        <div className="workspace-nav-footer"><OrderSenseLogo /><span>Clarity in every order.<small>Hospitality solutions</small></span></div>
       </nav>
       {['predictions', 'consumption', 'purchase'].includes(activeTab) && <header className="workspace-heading">
         <div><span className="workspace-eyebrow">ORDERSENSE / {activeTab === 'purchase' ? 'PLANNING' : 'INTELLIGENCE'}</span>

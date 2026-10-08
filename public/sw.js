@@ -1,9 +1,9 @@
-const CACHE_VERSION = 'ordersense-zestora-v2';
+const CACHE_VERSION = 'ordersense-ordersense-v2';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/zestora.svg',
+  '/ordersense.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/icons/apple-touch-icon-180.png',

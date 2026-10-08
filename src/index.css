@@ -1,4 +1,4 @@
-/* Global Design System - Zestora Reorder Predictor (Navy & White Theme) */
+/* Global Design System - OrderSense Reorder Predictor (Navy & White Theme) */
 :root {
   /* HSL Color System */
   --bg-primary: hsl(215, 25%, 97%);
@@ -13,8 +13,8 @@
   --text-muted: hsl(215, 16%, 55%);
   
   /* Accent / Brand Colors */
-  --brand-primary: hsl(221, 83%, 53%);     /* Zestora Navy-Blue Accent */
-  --brand-navy: hsl(222, 47%, 15%);        /* Zestora Navy Primary */
+  --brand-primary: hsl(221, 83%, 53%);     /* OrderSense Navy-Blue Accent */
+  --brand-navy: hsl(222, 47%, 15%);        /* OrderSense Navy Primary */
   --brand-navy-light: hsl(222, 30%, 25%);  /* Mid Navy */
   --primary-glow: hsla(221, 83%, 53%, 0.08);
   

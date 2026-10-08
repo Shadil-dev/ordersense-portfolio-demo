@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "dev:local": "vite --mode local-preview",
-    "dev:ceo": "vite --mode local-preview --config vite.ceo-preview.config.ts",
-    "dev:design": "vite --mode local-preview --config vite.zestora-preview.config.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

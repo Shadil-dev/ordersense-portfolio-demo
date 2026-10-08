@@ -1,7 +1,7 @@
 {
-  "name": "Zestora",
-  "short_name": "Zestora",
-  "description": "Zestora workspace for reorder forecasting, consumption insights, purchase planning, CRM, and accounts receivable follow-ups.",
+  "name": "OrderSense",
+  "short_name": "OrderSense",
+  "description": "OrderSense workspace for reorder forecasting, consumption insights, purchase planning, CRM, and accounts receivable follow-ups.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -13,7 +13,7 @@
   "categories": ["business", "productivity", "finance"],
   "icons": [
     {
-      "src": "/zestora.svg",
+      "src": "/ordersense.svg",
       "sizes": "120x120",
       "type": "image/svg+xml",
       "purpose": "any"
