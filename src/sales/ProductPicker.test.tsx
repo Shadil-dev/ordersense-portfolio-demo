@@ -1,0 +1,11 @@
+import {it,expect,vi} from 'vitest';
+import {render,screen,waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import ProductPicker from './ProductPicker';
+it('autofills catalog identity without inventing a monthly financial estimate',async()=>{
+ const request=vi.fn().mockResolvedValue({items:[{productId:'zoho-item',name:'Tissue rolls',sku:'TR',unit:'pack',salesRate:250}],hasMore:false});const submit=vi.fn().mockResolvedValue(undefined);const user=userEvent.setup();render(<ProductPicker request={request} busy={false} submit={submit} outletCount={3}/>);
+ await user.click(screen.getByText('Add product or category'));await waitFor(()=>expect(screen.getByRole('button',{name:/Tissue rolls/})).toBeTruthy());await user.type(screen.getByLabelText('Search products'),'Tissue');await waitFor(()=>expect(request).toHaveBeenLastCalledWith('/catalog/search?query=Tissue&page=0'));await user.click(screen.getByRole('button',{name:/Tissue rolls/}));expect(screen.getByLabelText('Product / category')).toHaveValue('Tissue rolls');await user.type(screen.getByLabelText('Average monthly quantity per outlet'),'10');expect(screen.getByLabelText('Average monthly value per outlet (INR)')).toHaveValue(null);await user.clear(screen.getByLabelText('Average monthly value per outlet (INR)'));await user.type(screen.getByLabelText('Average monthly value per outlet (INR)'),'2000');await user.click(screen.getByRole('button',{name:'Add product'}));expect(submit).toHaveBeenCalledWith({description:'Tissue rolls',zohoProductId:'zoho-item',expectedMonthlyValue:6000,expectedQuantity:30});
+});
+it('permits a planned product without creating a Zoho identity',async()=>{
+ const request=vi.fn().mockResolvedValue({items:[],hasMore:false});const submit=vi.fn().mockResolvedValue(undefined);const user=userEvent.setup();render(<ProductPicker request={request} busy={false} submit={submit} outletCount={2}/>);await user.click(screen.getByText('Add product or category'));await user.selectOptions(screen.getByLabelText('Product type'),'planned');await user.type(screen.getByLabelText('Product / category'),'Future category');await user.click(screen.getByRole('button',{name:'Add product'}));expect(submit).toHaveBeenCalledWith({description:'Future category',zohoProductId:null,expectedMonthlyValue:null,expectedQuantity:null});
+});

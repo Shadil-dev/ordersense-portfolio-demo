@@ -1,0 +1,221 @@
+/* Base mobile adaptations. zestora-system.css supplies the final shared tokens and presentation. */
+@media (max-width: 768px) {
+  :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: var(--font-sans);
+    --shadow-premium-sm: 0 3px 14px rgb(15 35 70 / 6%);
+    --shadow-premium: 0 4px 18px rgb(15 35 70 / 7%);
+    --mobile-radius: 16px;
+  }
+  body { background: #f5f8fc !important; line-height: 1.5; }
+  #root, .dashboard-container { width: 100%; min-width: 0; }
+  .dashboard-container { padding: 12px 16px calc(28px + env(safe-area-inset-bottom)) !important; }
+  .dashboard-container *, .ceo-page * { min-width: 0; }
+  main, section, article, fieldset { max-width: 100%; }
+  img, video, canvas { max-width: 100%; }
+  h1, h2, h3, h4, p, small, strong, label { overflow-wrap: anywhere; }
+  h1, h2, h3, h4 { font-family: var(--font-heading) !important; font-weight: 700 !important; letter-spacing: -.035em !important; }
+  .ceo-page h1, .delivery-head h1, .sf-header h1, .fa-heading h1, .au-heading h1,
+  .credit-page h2, .holds-page h2, .ar-heading h2 { font-size: 27px !important; line-height: 1.2 !important; }
+  .dashboard-header { margin: -12px -16px 20px !important; padding: 12px 16px !important; gap: 8px; border-radius: 0 0 18px 18px !important; }
+  .brand-wrapper { gap: 9px !important; min-width: 0; }
+  .brand-name { font-size: 21px !important; letter-spacing: -.05em !important; }
+  .brand-subtitle { font-size: 8px !important; letter-spacing: 1px !important; }
+  .header-actions { gap: 8px !important; flex-shrink: 0; }
+  .hamburger-btn { margin-right: 0 !important; }
+  .logo-icon { flex-shrink: 0; }
+  button, input, select, textarea { font-family: var(--font-sans) !important; }
+  button { touch-action: manipulation; }
+  .dashboard-container button:not(.ceo-close):not(.modal-close-btn):not(.drawer-close-btn):not(.ceo-comparison-close):not(.ceo-metric):not(.ceo-definition):not(.ceo-link) {
+    min-height: 44px; border-radius: 12px; font-size: 13px; font-weight: 600; line-height: 1.3;
+  }
+  .btn-primary, .btn-secondary, .btn-modal-cancel, .delivery-primary, .delivery-secondary,
+  .au-primary, .au-secondary, .sf-save, .sf-cancel, .fp-promises button, .ceo-actions button {
+    min-height: 44px !important; border-radius: 12px !important; padding: 11px 14px !important;
+    font-size: 13px !important; font-weight: 600 !important; justify-content: center;
+  }
+  .btn-primary, .delivery-primary, .au-primary, .sf-save, .fp-log-promise, .ceo-primary {
+    background: var(--brand-primary) !important; color: #fff !important; border-color: var(--brand-primary) !important; box-shadow: none !important;
+  }
+  input:not([type=checkbox]):not([type=radio]), select, textarea {
+    min-width: 0 !important; max-width: 100%; min-height: 46px; border-radius: 12px !important;
+    font-size: 16px !important; line-height: 1.4; color: var(--text-primary); background: #fff;
+  }
+  textarea { resize: vertical; }
+  input[type=checkbox], input[type=radio] { width: 18px; height: 18px; flex: 0 0 auto; accent-color: var(--brand-primary); }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #b5caff; outline-offset: 2px; }
+  button:disabled { opacity: .5; cursor: default; }
+  .card, .glass-panel, .metric-card, .ar-card, .ar-metric, .ar-today-board, .sf-card,
+  .sf-history-card, .fa-panel, .delivery-route, .delivery-panel, .au-create, .au-access-settings,
+  .au-users, .ceo-panel, .fp-promises, .holds-list article {
+    border-radius: var(--mobile-radius) !important; box-shadow: var(--shadow-premium-sm) !important;
+  }
+  .ceo-page, .delivery-home, .sf-page, .finance-activity, .admin-users-page, .credit-page, .holds-page, .ar-workspace {
+    width: 100%; min-width: 0; padding: 12px 0 28px !important; background: transparent !important;
+  }
+  .ceo-header, .sf-header, .fa-heading, .au-heading, .credit-page>header, .holds-page>header,
+  .ar-heading, .ceo-panel-heading, .fp-promises-header { display: flex !important; flex-direction: column; align-items: stretch !important; gap: 14px; }
+  .ceo-panel, .fp-promises, .fa-panel, .au-create, .au-access-settings, .au-users { padding: 16px !important; }
+  .ceo-actions, .fp-workspace-actions, .delivery-head-actions, .ar-heading-actions { display: flex; flex-wrap: wrap; width: 100%; gap: 8px; }
+  .ceo-actions>button, .fp-workspace-actions>button { flex: 1 1 120px; }
+  .ceo-controls, .ceo-filters, .ar-toolbar, .sf-filters, .controls-filter-row { width: 100%; flex-wrap: wrap !important; gap: 10px !important; }
+  .ceo-filters label, .ceo-filters input, .ceo-filters select, .ar-toolbar>select, .fp-promise-filters>* { width: 100%; flex: 1 1 100%; }
+  .ceo-filters label { display: flex; }
+  .ceo-filters input { flex: 1; }
+  .ceo-period { width: 100%; }
+  .ceo-period button { flex: 1; }
+  .ceo-period-description { margin-left: 0; text-align: left; width: 100%; }
+  .ceo-controls>label { flex-wrap: wrap; width: 100%; }
+  .ceo-chart-grid, .ceo-source-grid, .vendor-cards-grid, .au-form { grid-template-columns: minmax(0, 1fr) !important; }
+  .ceo-metrics, .ar-metrics, .fa-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+  .ceo-page .ceo-metric { padding: 15px 12px; border-radius: 16px; }
+  .ceo-metric span { font-size: 12px; align-items: start; gap: 6px; }
+  .ceo-metric strong { font-size: clamp(20px, 6vw, 27px); }
+  .ceo-metric small { font-size: 11px; }
+  .ceo-inline-stats { grid-template-columns: minmax(0, 1fr); }
+  .ceo-issues, .ceo-table-wrap { max-height: none; overflow: visible; }
+  .ceo-issue-value { min-width: 0; }
+  .ceo-definition { flex-wrap: wrap; }
+  .ceo-timeline article { flex-direction: column; gap: 8px; padding-left: 12px; }
+  .ceo-ageing { flex-wrap: wrap; }
+  .ceo-ageing>span { width: 90px; }
+  .ceo-ageing b { width: auto; }
+  .suppression-subtabs, .sf-tabs, .ceo-tabs, .ar-filters { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .suppression-subtabs button, .sf-tabs button, .ceo-tabs button, .ar-filters button { flex: 0 0 auto; }
+  .nav-drawer { width: min(320px, 88vw); padding: 20px; overflow-y: auto; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+  .drawer-nav-item { min-height: 48px !important; }
+  .profile-dropdown-menu { max-width: calc(100vw - 32px); right: 0; }
+  .au-user-head { flex-wrap: wrap; }
+  .au-ident { flex: 1 1 160px; }
+  .au-actions { width: 100%; display: flex; gap: 8px; }
+  .au-actions button { flex: 1; }
+  .au-role-row, .au-access-rule { flex-wrap: wrap; gap: 10px; }
+  .au-role-row select { width: 100%; }
+  .ar-invoice-row { grid-template-columns: minmax(0,1fr) auto !important; }
+  .ar-invoice-row button { grid-column: 1/-1; width: 100%; }
+  .ar-today-list article, .fa-issue-list article { flex-wrap: wrap; }
+  .sf-history-card>button { position: static; justify-self: stretch; justify-content: center; }
+  .sf-edit { grid-template-columns: minmax(0,1fr); }
+  .sf-team-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .holds-page>header { display: flex !important; }
+  .holds-summary { display: flex; align-items: center; gap: 12px; text-align: left; }
+  .holds-invoices>div { grid-template-columns: minmax(0,1fr) auto; }
+  .vendor-card-header, .vendor-item-row, .po-forecast-header-card { flex-wrap: wrap; }
+  .vendor-name-title, .vendor-item-name { white-space: normal !important; overflow-wrap: anywhere; }
+  .modal-overlay, .ceo-overlay, .sf-overlay, .delivery-modal-backdrop { padding: 12px !important; }
+  .modal-card, .ceo-modal, .sf-modal, .delivery-modal, .followup-dialog, .suppression-dialog {
+    width: min(100%, 560px) !important; max-width: calc(100vw - 24px) !important;
+    max-height: calc(100dvh - 24px) !important; overflow-y: auto; overscroll-behavior: contain;
+    border-radius: 20px !important; padding: 20px !important;
+  }
+  .ceo-modal h2 { padding-right: 28px; }
+  .ceo-close, .modal-close-btn, .ceo-comparison-close { width: 28px; height: 28px; padding: 4px !important; min-height: 28px !important; }
+  .modal-actions, .sf-modal footer, .delivery-modal>footer, .au-editor-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modal-actions>button, .sf-modal footer>button, .delivery-modal>footer>button, .au-editor-actions>button { flex: 1 1 120px; }
+  .table-responsive, .table-container, .ceo-table-wrap { width: 100%; min-width: 0; max-width: 100%; overflow: visible !important; }
+  table.z-mobile-table { display: block; width: 100% !important; min-width: 0 !important; white-space: normal !important; border: 0; box-shadow: none !important; background: transparent; }
+  .z-mobile-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .z-mobile-table tbody, .z-mobile-table tfoot { display: block; width: 100%; }
+  .z-mobile-table tr { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 16px; width: 100%; margin: 0 0 12px; padding: 14px; background: #fff; border: 1px solid var(--border-color); border-radius: 16px; box-shadow: var(--shadow-premium-sm); }
+  .z-mobile-table tr[hidden] { display: none !important; }
+  .followup-history table.z-mobile-table tr { padding: 14px !important; column-gap: 16px !important; }
+  .followup-history table.z-mobile-table td[data-label] { display: block !important; max-width: none !important; padding: 10px 0 !important; }
+  table.z-mobile-table td, table.z-mobile-table td.hide-mobile { display: block !important; width: 100% !important; white-space: normal !important; text-align: left !important; padding: 10px 0 !important; border: 0; border-bottom: 1px solid #edf1f6; overflow-wrap: anywhere; font-size: 14px !important; }
+  .z-mobile-table td:last-child { border-bottom: 0; }
+  .z-mobile-table td:first-child, .z-mobile-table td:last-child, .z-mobile-table td[colspan],
+  .z-mobile-table td[data-label="Owner"], .z-mobile-table td[data-label="Conversation"],
+  .z-mobile-table td[data-label*="Notes"], .z-mobile-table td[data-label="Updated by"],
+  .z-mobile-table td[data-label="Customer / Product"], .z-mobile-table td[data-label="Reason"] { grid-column: 1/-1; }
+  table.z-mobile-table td[data-label]::before { content: attr(data-label); display: block !important; position: static !important; width: auto !important; margin: 0 0 5px; color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: none; }
+  .z-mobile-table td button:not(.ceo-link) { width: 100%; margin-top: 6px; }
+  .z-mobile-table td input:not([type=checkbox]):not([type=radio]), .z-mobile-table td select { width: 100%; }
+  .z-mobile-table td:has(.entity-cell) { min-width: 0 !important; }
+  .entity-name, .entity-id { white-space: normal !important; overflow-wrap: anywhere; }
+  .ceo-bars { gap: 7px; }
+  .ceo-bar-group>small { font-size: 8px; }
+  .delivery-head-actions>.delivery-header-sync, .delivery-head-actions>.delivery-primary, .delivery-head-actions>.delivery-secondary { font-size: 12px !important; padding: 10px 6px !important; }
+  .delivery-head-actions>.delivery-header-sync { flex: .75 1 0% !important; }
+  .delivery-head-actions>.delivery-secondary { flex: 1.1 1 0% !important; }
+  .delivery-head-actions>.delivery-primary { flex: 1.35 1 0% !important; }
+  /* Delivery is a field workflow: readable stops and large in-flow actions. */
+  .delivery-head { gap: 18px; margin-bottom: 18px; }
+  .delivery-weekbar { display: grid; grid-template-columns: 44px minmax(0,1fr) 44px; gap: 8px; padding: 10px; }
+  .delivery-weekbar strong { font-size: 12px; }
+  .delivery-weekbar .delivery-today { grid-column: 1/-1; width: 100%; min-height: 36px !important; background: #f2f6fc; }
+  .delivery-week-grid { gap: 4px; margin-bottom: 24px; }
+  .delivery-home .delivery-day { padding: 8px 2px; min-height: 72px !important; border-radius: 12px !important; gap: 4px; box-shadow: none !important; }
+  .delivery-day small { font-size: 9px; }
+  .delivery-day strong { font-size: 18px; }
+  .delivery-day span { font-size: 8px; }
+  .delivery-day-title { align-items: flex-start; gap: 10px; }
+  .delivery-day-title>span { flex-shrink: 0; padding: 6px 8px; background: #eaf1fe; border-radius: 8px; color: var(--brand-primary); }
+  .delivery-route { overflow: visible; background: transparent; border: 0; box-shadow: none !important; }
+  .delivery-route-heading { display: block; padding: 16px; border: 1px solid var(--border-color); border-radius: 16px; }
+  .delivery-route-heading strong { font-size: 15px; align-items: flex-start; }
+  .delivery-route-heading strong svg { flex-shrink: 0; margin-top: 2px; }
+  .delivery-route-heading small { font-size: 12px; line-height: 1.5; }
+  .delivery-route-heading>span { display: block; max-width: none !important; text-align: left !important; margin-top: 10px; font-size: 11px; }
+  .delivery-run-note { padding: 4px 0 !important; font-size: 12px; }
+  .delivery-stop-list { padding: 0 !important; }
+  .delivery-stop { display: block !important; position: relative; margin: 12px 0; padding: 16px !important; border: 1px solid var(--border-color) !important; border-radius: 16px; box-shadow: var(--shadow-premium-sm) !important; }
+  .delivery-stop-number { position: absolute; top: 16px; left: 16px; width: 34px; height: 34px; }
+  .delivery-stop-title { display: grid; gap: 8px; padding-left: 44px; margin-bottom: 14px; }
+  .delivery-stop-title strong { font-size: 16px !important; line-height: 1.4; }
+  .delivery-status { justify-self: start; padding: 5px 9px; font-size: 10px; }
+  .delivery-stop-main>small { font-size: 12px; line-height: 1.5; }
+  .delivery-address { padding: 12px !important; border-radius: 10px !important; margin-top: 10px !important; }
+  .delivery-phone { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px !important; }
+  .delivery-stop-main .delivery-meta { font-size: 11px; margin: 10px 0; }
+  .delivery-stop-actions { display: grid !important; grid-template-columns: minmax(0,1fr) !important; gap: 8px; }
+  .delivery-stop-actions button, .delivery-stop-actions a { width: 100%; justify-content: center; min-height: 44px; }
+  .delivery-stop-actions a { border: 1px solid #cfdced; border-radius: 12px; background: #f5f8fe; font-size: 13px; }
+  .delivery-payment-chips { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; }
+  .delivery-payment-chips>span { padding: 12px; border-radius: 12px; font-size: 12px; line-height: 1.6; white-space: normal; }
+  .delivery-payment-chips button { min-height: 44px !important; padding: 8px 16px !important; margin: 8px 8px 0 0 !important; border-radius: 10px !important; font-size: 12px !important; }
+  .delivery-panel-heading { position: relative; padding-right: 38px; }
+  .delivery-panel-heading>.delivery-icon-button { position: absolute; top: 0; right: 0; width: 28px; height: 28px; min-height: 28px !important; padding: 4px !important; }
+  .delivery-schedule-fields { padding: 14px; background: #f4f7fc; border: 1px solid var(--border-color); gap: 16px; }
+  .delivery-schedule-fields label, .delivery-modal>label { font-size: 13px; }
+  .delivery-order-list-head { flex-wrap: wrap; gap: 6px; padding: 14px; }
+  .delivery-order-list-head strong { font-size: 14px; }
+  .delivery-order-list-head span { font-size: 12px; }
+  .delivery-order { padding: 16px !important; }
+  .delivery-order-select strong { font-size: 15px; }
+  .delivery-order-select small { font-size: 12px; line-height: 1.5; }
+  .delivery-order-sort { width: 100%; gap: 10px !important; }
+  .delivery-order-sort button { width: 48px !important; height: 44px !important; font-size: 18px; }
+  .delivery-report-date { grid-template-columns: minmax(0,1fr) 44px 28px !important; }
+  .delivery-report-date .delivery-icon-button { min-height: 28px !important; width: 28px; height: 28px; }
+  .delivery-report-stats { grid-template-columns: minmax(0,1fr); gap: 10px; }
+  .delivery-report-stats article { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px; }
+  .delivery-report-stats small { font-size: 13px; }
+  .delivery-report-stats strong { font-size: 22px; }
+  .delivery-report-stop { padding: 16px; border: 1px solid var(--border-color); border-radius: 14px; background: #fff; gap: 12px; font-size: 14px; }
+  .delivery-report-stop>[data-label]::before { content: attr(data-label); display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .delivery-modal>header { position: relative; padding-right: 36px; }
+  .delivery-modal>header .delivery-icon-button { position: absolute; top: 0; right: 0; width: 28px; height: 28px; min-height: 28px !important; }
+  .delivery-modal>label input, .delivery-modal>label select, .delivery-modal>label textarea { padding: 12px !important; min-height: 46px; font-size: 16px !important; }
+  .delivery-upload { padding: 16px !important; min-height: 90px; }
+  .delivery-location-state { font-size: 12px; line-height: 1.5; }
+  .delivery-payment-inline { padding: 14px; border: 1px solid var(--border-color); border-radius: 14px; }
+  .delivery-proof-modal { max-width: 100%; max-height: calc(100dvh - 24px); overflow: auto; }
+  .login-screen-wrapper { padding: 20px 16px; min-height: 100dvh; }
+  .login-card { width: 100%; max-width: 420px; padding: 28px 22px; border-radius: 20px; }
+  .btn-login-submit { min-height: 48px; border-radius: 12px; }
+  .profile-avatar-btn { border-radius: 50% !important; }
+  body:has([aria-modal="true"]), body:has(dialog[open]), body:has(.nav-drawer) { overflow-y: hidden; }
+  .sf-modal header { position: relative; padding-right: 36px; }
+  .sf-modal header button { position: absolute; right: 0; top: 0; width: 28px; height: 28px; min-height: 28px !important; padding: 4px; }
+  .sf-radio, .followup-radio-option { min-height: 44px; }
+}
+@media (max-width: 359px) {
+  .dashboard-container { padding-left: 12px !important; padding-right: 12px !important; }
+  .dashboard-header { margin-left: -12px !important; margin-right: -12px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  .brand-subtitle { display: none; }
+  .brand-name { font-size: 19px !important; }
+  .ceo-metrics, .ar-metrics, .fa-metrics { grid-template-columns: minmax(0,1fr) !important; }
+  .delivery-head-actions>.delivery-primary, .delivery-head-actions>.delivery-secondary, .delivery-head-actions>.delivery-header-sync { font-size: 11px !important; gap: 4px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
